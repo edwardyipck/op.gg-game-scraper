@@ -47,7 +47,10 @@ def parse_data(data):
         try:
             wards = game.find('span',{'class':'wards vision'}).text
         except:
-            wards = 'N/A'
+            if gametype != 'ARAM':
+                wards = 0
+            else:
+                wards = 'N/A'
         
         game_length = game.find('div',{'class':'GameLength'}).text
         allchamp = [x.text for x in game.find_all('div',{'class':re.compile('Image16 __sprite __spc16')})]
@@ -84,6 +87,7 @@ def output(url):
     games_list = parse_data(data)
     nextnum = (games_list[-1]['Time Unix'])
     gameurl_next = f'https://{region}/summoner/matches/ajax/averageAndList/startInfo={nextnum}&summonerId={summoner_id}'
+    print(f'Scraped {len(games_list)} games')
     # Runs until the webpage has no more games left to find, (when function game_data returns False)
     while game_data(gameurl_next) != False:
         data = (game_data(gameurl_next))
