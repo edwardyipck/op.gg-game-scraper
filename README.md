@@ -7,6 +7,9 @@ Works with any server region
 - Open command prompt in the directory you have saved `opggscrape.py` and run `pyhon opggscrape.py`
 - This may take long if the account has many games
 
+# Additional Information:
+Due to the way these games are stored, this code runs in steps of 20 games, at each step a new webpage containing the data is opened which is the slowest step of the code
+
 ## Libraries
 - Requests
 - BeautifulSoup
